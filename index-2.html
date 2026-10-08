@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InkluTa'lim AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+(function () {
+  try {
+    if (window.Telegram && window.Telegram.WebApp) {
+      var tg = window.Telegram.WebApp;
+      tg.ready();
+      tg.expand();
+      if (tg.setHeaderColor) tg.setHeaderColor('#1455d6');
+      if (tg.setBackgroundColor) tg.setBackgroundColor('#eef2f7');
+      window.__inTelegram = true;
+    }
+  } catch (e) {}
+})();
+</script>
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<meta name="theme-color" content="#1455d6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="InkluTa'lim AI">
+<script>
+(function(){
+  var manifest = {
+    name: "InkluTa'lim AI",
+    short_name: "InkluTa'lim",
+    start_url: ".",
+    display: "standalone",
+    background_color: "#eef2f7",
+    theme_color: "#1455d6",
+    icons: [
+      { src: "data:image/png;base64,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", sizes: "192x192", type: "image/png" },
+      { src: "data:image/png;base64,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", sizes: "512x512", type: "image/png" },
+      { src: "data:image/png;base64,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", sizes: "512x512", type: "image/png", purpose: "maskable" }
+    ]
+  };
+  var blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+  var link = document.createElement('link');
+  link.rel = 'manifest';
+  link.href = URL.createObjectURL(blob);
+  document.head.appendChild(link);
+
+  if ('serviceWorker' in navigator) {
+    try {
+      var swCode = "self.addEventListener('fetch',function(e){});";
+      var swBlob = new Blob([swCode], { type: 'application/javascript' });
+      navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(function () {});
+    } catch (e) {}
+  }
+
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    window.__deferredInstallPrompt = e;
+    var btn = document.getElementById('installBtn');
+    if (btn) btn.style.display = 'inline-flex';
+  });
+})();
+</script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0B1220; --ink-soft: #4B5667; --ink-faint: #8993A4;
+    --surface: #FFFFFF; --surface-sunk: #EEF2F7;
+    --line: #E2E7F0; --line-strong: #CDD5E3;
+    --brand: #1455D6; --brand-deep: #0B2E7A; --brand-bright: #3B82F6;
+    --brand-wash: #E7EFFD;
+    --gold: #92651B; --gold-wash: #FBF2DF;
+    --good: #0D7D5F; --good-wash: #E4F7EE; --good-line: #BCE8D3;
+    --bad: #B4293A; --bad-wash: #FCE9EA;
+    --radius-s: 10px; --radius-m: 14px; --radius-l: 18px;
+    --shadow-card: 0 1px 2px rgba(11,18,32,.05), 0 10px 22px -14px rgba(11,46,122,.30);
+    --shadow-pop: 0 10px 26px -10px rgba(11,46,122,.50);
+  }
+  body {
+    font-family: 'Poppins', 'Segoe UI', Roboto, sans-serif; color: var(--ink);
+    background: var(--surface-sunk);
+    background-image:
+      radial-gradient(560px 340px at 8% -8%, rgba(20,85,214,.12), transparent 60%),
+      radial-gradient(460px 320px at 112% 8%, rgba(11,46,122,.09), transparent 60%);
+    background-attachment: fixed;
+    min-height: 100vh; padding: 22px 16px 100px;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 16px; }
+  .brandRow { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .logomark { flex: 0 0 auto; display: block; filter: drop-shadow(0 6px 14px rgba(79,70,229,.35)); }
+  .logo { font-size: 23px; font-weight: 700; letter-spacing: -.3px; color: var(--ink); }
+  .logo span { color: var(--brand); }
+  .sub { margin-top: 7px; font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+  .author { margin-top: 5px; font-size: 11.5px; color: var(--ink-faint); font-weight: 500; }
+  .scorebar { display: flex; justify-content: space-between; align-items: center; margin: 12px 0 2px; }
+  .score { display: inline-flex; align-items: center; gap: 5px; padding: 6px 14px 6px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); color: var(--gold); font-size: 13.5px; font-weight: 700; box-shadow: var(--shadow-card); }
+  .score svg { flex: 0 0 auto; }
+  .langSwitch { display: inline-flex; gap: 2px; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: 3px; box-shadow: var(--shadow-card); }
+  .langBtn { border: none; background: transparent; padding: 5px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; color: var(--ink-faint); cursor: pointer; }
+  .langBtn.active { background: var(--brand); color: #fff; }
+
+  .tabpage { display: none; }
+  .tabpage.active { display: block; }
+
+  .section { margin-top: 24px; }
+  .section h2 { font-size: 13.5px; font-weight: 600; color: var(--ink-soft); margin-bottom: 11px; letter-spacing: .1px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .gbtn {
+    padding: 16px 8px; border-radius: var(--radius-m); border: 1px solid var(--line); background: var(--surface);
+    font-size: 13.5px; font-weight: 500; color: var(--ink-soft); cursor: pointer; text-align: center;
+    box-shadow: var(--shadow-card); transition: transform .12s, box-shadow .12s, border-color .12s;
+  }
+  .gbtn:active { transform: scale(.97); }
+  .gbtn.active { border-color: var(--brand); background: var(--brand-wash); color: var(--brand-deep); box-shadow: var(--shadow-pop); }
+  .emoji { display: block; font-size: 25px; margin-bottom: 5px; }
+
+  .resultCard {
+    margin-top: 13px; background: var(--surface); border-radius: var(--radius-l); border: 1px solid var(--line);
+    padding: 22px 20px; text-align: center; min-height: 90px; box-shadow: var(--shadow-card);
+  }
+  .word { font-size: 29px; font-weight: 700; color: var(--ink); min-height: 38px; transition: transform .15s; letter-spacing: -.2px; }
+  .wordsub { font-size: 12.5px; color: var(--ink-faint); margin-top: 7px; font-weight: 500; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+  .chip {
+    padding: 7px 15px; border-radius: 999px; background: var(--surface); color: var(--ink-soft);
+    font-size: 12.5px; font-weight: 600; cursor: pointer; border: 1px solid var(--line);
+  }
+  .chip.active { border-color: var(--brand); background: var(--brand-wash); color: var(--brand-deep); }
+
+  .lesson-progress { height: 6px; background: var(--line); border-radius: 6px; overflow: hidden; margin-bottom: 18px; }
+  .lesson-fill { height: 100%; background: var(--brand); border-radius: 6px; width: 0%; transition: width .3s; }
+  .lesson-q { font-size: 17px; font-weight: 600; color: var(--ink); text-align: center; margin-bottom: 16px; line-height: 1.4; }
+  .lesson-q b { color: var(--brand-deep); }
+  .qbtn { width: 100%; padding: 16px 14px; border-radius: var(--radius-m); border: 1px solid var(--line); background: var(--surface); font-size: 15px; font-weight: 500; color: var(--ink); cursor: pointer; margin-bottom: 10px; text-align: left; box-shadow: var(--shadow-card); }
+  .qbtn.correct { border-color: var(--good-line); background: var(--good-wash); color: var(--good); }
+  .qbtn.wrong { border-color: #EFC3C9; background: var(--bad-wash); color: var(--bad); }
+  .lesson-done { text-align: center; padding: 22px 10px; }
+  .lesson-done .big { font-size: 42px; }
+  .lesson-done .score { display: inline-block; margin-top: 12px; font-size: 19px; font-weight: 700; color: var(--brand-deep); background: var(--brand-wash); padding: 8px 20px; border-radius: 999px; }
+  .restartbtn { margin-top: 18px; padding: 12px 26px; border-radius: 999px; border: none; background: var(--brand); color: #fff; font-size: 13.5px; font-weight: 600; cursor: pointer; box-shadow: var(--shadow-pop); }
+
+  .statcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-l); padding: 18px 20px; margin-bottom: 12px; box-shadow: var(--shadow-card); }
+  .statrow { display: flex; justify-content: space-between; align-items: center; font-size: 13.5px; color: var(--ink-soft); padding: 8px 0; border-bottom: 1px solid var(--surface-sunk); }
+  .statrow:last-child { border-bottom: none; }
+  .statrow b { color: var(--ink); font-size: 15.5px; }
+  .levelbar { height: 8px; background: var(--line); border-radius: 8px; overflow: hidden; margin-top: 8px; }
+  .levelfill { height: 100%; background: var(--brand); border-radius: 8px; width: 0%; transition: width .3s; }
+
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,.92); backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line); display: flex; justify-content: space-around; padding: 9px 6px 11px; z-index: 10;
+  }
+  .tabbtn { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10.5px; font-weight: 600; color: var(--ink-faint); cursor: pointer; padding: 5px 14px; border-radius: 12px; transition: color .12s; }
+  .tabbtn svg { stroke: var(--ink-faint); transition: stroke .12s; }
+  .tabbtn.active { color: var(--brand-deep); }
+  .tabbtn.active svg { stroke: var(--brand); }
+
+  .disclaimer { margin-top: 24px; padding: 14px 16px; background: var(--gold-wash); border: 1px solid #F0DDB2; border-radius: var(--radius-m); font-size: 11.5px; color: #7A5415; line-height: 1.55; }
+
+  .modeToggle { display: flex; gap: 8px; margin-bottom: 14px; background: var(--surface-sunk); padding: 4px; border-radius: 999px; border: 1px solid var(--line); }
+  .modebtn { flex: 1; padding: 10px 6px; border-radius: 999px; border: none; background: transparent; font-size: 13px; font-weight: 600; color: var(--ink-soft); cursor: pointer; }
+  .modebtn.active { background: var(--surface); color: var(--brand-deep); box-shadow: var(--shadow-card); }
+
+  .camwrap { position: relative; width: 100%; aspect-ratio: 4/3; background: var(--ink); border-radius: var(--radius-l); overflow: hidden; margin-bottom: 4px; }
+  .camwrap video, .camwrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+  .camwrap canvas { pointer-events: none; }
+  .camhint { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); text-align: center; color: #D7D4E8; font-size: 13px; font-weight: 400; padding: 0 20px; z-index: 3; line-height: 1.6; }
+  .camstartbtn { padding: 13px 26px; border-radius: 999px; border: none; background: var(--brand); color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 10px 24px -8px rgba(0,0,0,.5); }
+  .camtop { position: absolute; left: 12px; top: 10px; right: 12px; display: flex; gap: 6px; align-items: center; z-index: 4; }
+  .campill { padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; background: rgba(255,255,255,.14); color: #fff; backdrop-filter: blur(6px); }
+  .camstop { margin-left: auto; padding: 5px 12px; border-radius: 999px; border: none; background: rgba(255,255,255,.14); color: #F3A9AE; font-size: 11px; font-weight: 600; cursor: pointer; }
+  .camlegend { font-size: 11.5px; color: var(--ink-faint); margin: 9px 0 2px; line-height: 1.6; }
+
+  .catChips { display: flex; gap: 7px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 12px; }
+  .catChip { flex: 0 0 auto; padding: 8px 15px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 12.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; white-space: nowrap; box-shadow: var(--shadow-card); }
+  .catChip.active { border-color: var(--brand); background: var(--brand-wash); color: var(--brand-deep); }
+
+  .lessonGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .lessonCard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-m); padding: 18px 12px; text-align: center; cursor: pointer; box-shadow: var(--shadow-card); }
+  .lessonCard .licon { font-size: 25px; margin-bottom: 7px; }
+  .lessonCard .ltitle { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .lessonCard .lcount { font-size: 11px; color: var(--ink-faint); margin-top: 3px; }
+  .lessonCard.done { border-color: var(--good-line); background: var(--good-wash); }
+  .lessonCard.done .ltitle { color: var(--good); }
+  .lessonBack { background: none; border: none; color: var(--brand-deep); font-size: 12.5px; font-weight: 600; cursor: pointer; margin-bottom: 11px; padding: 0; }
+
+  .avatarStage { position: relative; background: linear-gradient(165deg, var(--brand-wash), var(--surface-sunk)); border: 1px solid var(--line); border-radius: var(--radius-l); padding: 32px 20px 24px; text-align: center; overflow: hidden; min-height: 150px; box-shadow: var(--shadow-card); }
+  .avatarBadge { position: absolute; left: 12px; top: 11px; font-size: 10px; font-weight: 700; color: var(--brand-deep); background: rgba(255,255,255,.7); padding: 4px 10px; border-radius: 999px; letter-spacing: .1px; }
+  .avatarEmoji { font-size: 58px; min-height: 72px; display: flex; align-items: center; justify-content: center; transform-origin: 50% 65%; filter: drop-shadow(0 10px 18px rgba(53,47,140,.22)); }
+  .avatarEmoji.playing { animation: signPerform .75s cubic-bezier(.22,1.2,.36,1); }
+  @keyframes signPerform {
+    0% { transform: scale(.4) rotate(0deg); opacity: 0; }
+    55% { transform: scale(1.1) rotate(-5deg); opacity: 1; }
+    75% { transform: scale(.98) rotate(3deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+  .avatarCaption { margin-top: 12px; font-size: 24px; font-weight: 700; color: var(--ink); min-height: 32px; letter-spacing: -.2px; }
+
+  .gameStatus { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--ink-soft); font-weight: 600; margin-bottom: 10px; }
+  .memGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+  .memCard { aspect-ratio: 1; border-radius: var(--radius-s); background: var(--brand); box-shadow: var(--shadow-card); cursor: pointer; position: relative; perspective: 600px; }
+  .memCard .face { position: absolute; inset: 0; border-radius: var(--radius-s); display: flex; align-items: center; justify-content: center; backface-visibility: hidden; transition: transform .35s; }
+  .memCard .front { background: linear-gradient(160deg, var(--brand-bright), var(--brand)); color: #fff; font-size: 20px; font-weight: 800; transform: rotateY(0deg); }
+  .memCard .back { background: var(--surface); border: 1px solid var(--line); font-size: 26px; transform: rotateY(180deg); }
+  .memCard.flipped .front { transform: rotateY(-180deg); }
+  .memCard.flipped .back { transform: rotateY(0deg); }
+  .memCard.matched .back { background: var(--good-wash); border-color: var(--good-line); }
+
+  .videoLesson { text-align: center; }
+  .videoLesson .vlBig { font-size: 60px; min-height: 72px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 10px 18px rgba(11,46,122,.22)); }
+  .videoLesson .vlWord { margin-top: 10px; font-size: 23px; font-weight: 700; color: var(--ink); }
+  .videoLesson .vlBar { height: 6px; background: var(--line); border-radius: 6px; overflow: hidden; margin: 16px 0 6px; }
+  .videoLesson .vlFill { height: 100%; background: var(--brand); transition: width .25s linear; }
+  .videoLesson .vlSkip { margin-top: 14px; background: none; border: none; color: var(--ink-faint); font-size: 12.5px; font-weight: 600; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brandRow">
+      <svg class="logomark" width="38" height="38" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="lgA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1D63E0"/><stop offset="1" stop-color="#0B2E7A"/></linearGradient></defs>
+        <rect width="48" height="48" rx="13" fill="url(#lgA)"/>
+        <path d="M18 31V22.5a2 2 0 0 1 4 0V27" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/>
+        <path d="M22 27.2v-6.4a2 2 0 1 1 4 0V27" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/>
+        <path d="M26 27v-5.6a2 2 0 1 1 4 0V27" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/>
+        <path d="M30 27.3v-3.8a1.8 1.8 0 1 1 3.6 0V29c0 4.2-2.9 7.6-7.6 7.6h-1.4c-2.6 0-4.2-.8-5.8-2.7l-4-4.8c-.8-1-.6-2.3.5-3 1-.6 2.1-.4 2.9.5l1.8 2.1" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="logo">InkluTa'lim <span>AI</span></div>
+    </div>
+    <p class="sub" data-i18n="appSub">Eshitish va gapirishda nuqsoni bor bolalar uchun ta'lim platformasi</p>
+    <p class="author">Muallif: Saidazimova E'zoza · IT Queens Tanlovi · JDPU 2026</p>
+    <button id="installBtn" style="display:none;margin-top:11px;padding:9px 18px;border-radius:999px;border:none;background:var(--brand);color:#fff;font-size:12.5px;font-weight:600;cursor:pointer;box-shadow:var(--shadow-pop);" data-i18n="installBtn">Ilova sifatida o'rnatish</button>
+  </header>
+  <div class="scorebar">
+    <div class="langSwitch" id="langSwitch">
+      <button class="langBtn active" data-lang="uz">UZ</button>
+      <button class="langBtn" data-lang="en">EN</button>
+      <button class="langBtn" data-lang="ru">RU</button>
+    </div>
+    <div class="score"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.6 6.6L21 10l-5 4.4L17.4 21 12 17.3 6.6 21 8 14.4 3 10l6.4-1.4L12 2z"/></svg><span id="score">0</span></div>
+  </div>
+
+  <div class="tabpage active" id="page-tarjimon">
+    <div class="section">
+      <h2 data-i18n="tarjimonTitle">Imo-ishoradan matnga</h2>
+      <div class="modeToggle">
+        <button class="modebtn" id="modeManualBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:5px;"><path d="M8 13V5a1.5 1.5 0 0 1 3 0v6"/><path d="M11 12V4a1.5 1.5 0 0 1 3 0v8"/><path d="M14 12.3V6a1.5 1.5 0 0 1 3 0v7"/><path d="M17 13V9.5a1.5 1.5 0 0 1 3 0V15c0 3.5-2 6-5.5 6h-1.2C11 21 9.8 20.3 8.5 18.8L6 16c-.7-.8-.5-1.8.3-2.3.8-.5 1.7-.3 2.3.4l1.4 1.6"/></svg><span data-i18n="modeManual">Qo'lda tanlash</span></button>
+        <button class="modebtn active" id="modeCameraBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:5px;"><path d="M3 8a2 2 0 0 1 2-2h1.2a2 2 0 0 0 1.6-.8l.7-1a2 2 0 0 1 1.6-.8h3.8a2 2 0 0 1 1.6.8l.7 1a2 2 0 0 0 1.6.8H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/><circle cx="12" cy="13" r="3.2"/></svg><span data-i18n="modeCamera">Kamera (AI)</span></button>
+      </div>
+
+      <div id="manualView" style="display:none;">
+        <div class="catChips" id="catChips"></div>
+        <div class="grid2" id="gestures"></div>
+      </div>
+
+      <div id="cameraView">
+        <div class="camwrap" id="camwrap">
+          <video id="video" autoplay playsinline muted></video>
+          <canvas id="overlay"></canvas>
+          <div class="camhint" id="camhint"><button class="camstartbtn" id="camStartBtn" data-i18n="camStart">📷 Kamerani yoqish</button></div>
+          <div class="camtop" id="camtop" style="display:none;">
+            <span class="campill" id="camStatus" data-i18n="camOn">Kamera yoqilgan</span>
+            <button class="camstop" id="camStopBtn" data-i18n="camStop">To'xtatish</button>
+          </div>
+        </div>
+        <div class="camlegend" data-i18n="camLegend">Kamera 5 ta asosiy imo-ishorani taniydi: ✋ Salom · 👍 Yaxshi · ✊ Rahmat · ☝️ Ha · ✌️ G'alaba</div>
+      </div>
+
+      <div class="resultCard">
+        <div class="word" id="result">—</div>
+        <div class="wordsub" id="resultSub" data-i18n="resultHintCam">Kamerani yoqing yoki pastdan tanlang</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabpage" id="page-teskari">
+    <div class="section">
+      <h2 data-i18n="teskariTitle">Matndan imo-ishoraga — so'zni bosing</h2>
+      <div class="chips" id="chips"></div>
+      <div class="avatarStage">
+        <div class="avatarBadge" data-i18n="avatarBadge">🤖 AI surdo-tarjimon</div>
+        <div class="avatarEmoji" id="signEmoji">🤚</div>
+        <div class="avatarCaption" id="sign">—</div>
+      </div>
+      <div class="wordsub" id="signSub" style="text-align:center;margin-top:8px;" data-i18n="pickWordHint">So'zlardan birini bosing</div>
+    </div>
+  </div>
+
+  <div class="tabpage" id="page-darslar">
+    <div class="section">
+      <h2 id="darslarTitle" data-i18n="lessonsTitle">Saboqlar — mavzuni tanlang</h2>
+      <div id="lessonPicker" class="lessonGrid"></div>
+      <div id="lessonRunner" style="display:none;">
+        <button class="lessonBack" id="lessonBackBtn" data-i18n="lessonBack">← Mavzularga qaytish</button>
+        <div class="lesson-progress"><div class="lesson-fill" id="lessonFill"></div></div>
+        <div id="lessonBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabpage" id="page-stat">
+    <div class="section">
+      <h2 data-i18n="statsTitle">Mening natijalarim</h2>
+      <div class="statcard">
+        <div class="statrow"><span data-i18n="statTotal">Jami ball</span><b id="statScore">0</b></div>
+        <div class="statrow"><span data-i18n="statWordsLbl">O'rganilgan so'zlar</span><b id="statWords">0</b></div>
+        <div class="statrow"><span data-i18n="statLessonsLbl">Tugallangan darslar</span><b id="statLesson">0 / 4</b></div>
+      </div>
+      <div class="statcard">
+        <div class="statrow" style="border:none;"><span data-i18n="statLevelLbl">Daraja</span><b id="statLevel">1-daraja</b></div>
+        <div class="levelbar"><div class="levelfill" id="levelFill"></div></div>
+      </div>
+      <div class="disclaimer">
+        <b data-i18n="disclaimerLabel">Izoh:</b> <span data-i18n="disclaimerText">bu — ilova oqimining ishlaydigan namoyishi. Imo-ishoralar texnologiya isboti uchun tanlangan; yakuniy o'zbek imo-ishora lug'ati surdopedagoglar bilan tuziladi. Haqiqiy kamera orqali avtomatik aniqlash alohida demo versiyada mavjud.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabpage" id="page-games">
+    <div class="section">
+      <h2 data-i18n="gamesTitle">O'yinlar — mavzuni tanlang</h2>
+      <div id="gamePicker" class="lessonGrid"></div>
+      <div id="gameRunner" style="display:none;">
+        <button class="lessonBack" id="gameBackBtn" data-i18n="lessonBack">← Mavzularga qaytish</button>
+        <div id="gameStatus" class="gameStatus"></div>
+        <div class="memGrid" id="memGrid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tabbar">
+  <button class="tabbtn active" data-page="tarjimon">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V8a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/><path d="M14 10V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v4"/><path d="M10 10.2V7.4a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/><path d="M6 10.5V13a2 2 0 0 0-3.6 1.2L5 18c1.5 2.2 3 3.4 6 3.4h1.4c4 0 6-2.4 6-6.6V11a1.8 1.8 0 0 0-3.6 0"/></svg>
+    <span data-i18n="tabTarjimon">Tarjimon</span>
+  </button>
+  <button class="tabbtn" data-page="teskari">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13l-3-3"/><path d="M20 17H7l3 3"/></svg>
+    <span data-i18n="tabTeskari">Teskari</span>
+  </button>
+  <button class="tabbtn" data-page="darslar">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    <span data-i18n="tabSaboq">Saboq</span>
+  </button>
+  <button class="tabbtn" data-page="games">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>
+    <span data-i18n="tabGames">O'yinlar</span>
+  </button>
+  <button class="tabbtn" data-page="stat">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="7" width="4" height="13" rx="1"/><rect x="16" y="3" width="4" height="17" rx="1"/></svg>
+    <span data-i18n="tabNatijalar">Natijalar</span>
+  </button>
+</div>
+
+<script>
+var score = 0;
+var learnedWords = new Set();
+var scoreEl = document.getElementById('score');
+
+function bump(word) {
+  score++;
+  scoreEl.textContent = score;
+  if (word) learnedWords.add(word);
+  refreshStats();
+}
+
+function refreshStats() {
+  document.getElementById('statScore').textContent = score;
+  document.getElementById('statWords').textContent = learnedWords.size;
+  document.getElementById('statLesson').textContent = completedLessons.size + ' / ' + CATEGORIES.length;
+  var level = Math.floor(score / 5) + 1;
+  var within = score % 5;
+  document.getElementById('statLevel').textContent = currentLang === 'uz' ? (level + '-daraja') : (currentLang === 'ru' ? ('Уровень ' + level) : ('Level ' + level));
+  document.getElementById('levelFill').style.width = (within / 5 * 100) + '%';
+}
+
+var tabbtns = document.querySelectorAll('.tabbtn');
+tabbtns.forEach(function (b) {
+  b.addEventListener('click', function () {
+    tabbtns.forEach(function (x) { x.classList.remove('active'); });
+    b.classList.add('active');
+    document.querySelectorAll('.tabpage').forEach(function (p) { p.classList.remove('active'); });
+    document.getElementById('page-' + b.getAttribute('data-page')).classList.add('active');
+  });
+});
+
+var installBtn = document.getElementById('installBtn');
+if (installBtn && window.__inTelegram) { installBtn.style.display = 'none'; }
+if (installBtn) {
+  installBtn.addEventListener('click', function () {
+    if (window.__deferredInstallPrompt) {
+      window.__deferredInstallPrompt.prompt();
+      window.__deferredInstallPrompt.userChoice.then(function () { installBtn.style.display = 'none'; });
+    }
+  });
+}
+
+var manualView = document.getElementById('manualView');
+var cameraView = document.getElementById('cameraView');
+var modeManualBtn = document.getElementById('modeManualBtn');
+var modeCameraBtn = document.getElementById('modeCameraBtn');
+modeManualBtn.addEventListener('click', function () {
+  modeManualBtn.classList.add('active'); modeCameraBtn.classList.remove('active');
+  manualView.style.display = ''; cameraView.style.display = 'none';
+  if (window.stopCamera) window.stopCamera();
+  resultSub.textContent = t('resultHintManual');
+});
+modeCameraBtn.addEventListener('click', function () {
+  modeCameraBtn.classList.add('active'); modeManualBtn.classList.remove('active');
+  manualView.style.display = 'none'; cameraView.style.display = '';
+  resultSub.textContent = t('resultHintCam');
+});
+tabbtns.forEach(function (b) {
+  b.addEventListener('click', function () {
+    if (b.getAttribute('data-page') !== 'tarjimon' && window.stopCamera) window.stopCamera();
+  });
+});
+
+var I18N = {
+  appSub: { uz: "Eshitish va gapirishda nuqsoni bor bolalar uchun ta'lim platformasi", en: "A learning platform for children with hearing and speech difficulties", ru: "Образовательная платформа для детей с нарушениями слуха и речи" },
+  installBtn: { uz: "Ilova sifatida o'rnatish", en: "Install as app", ru: "Установить как приложение" },
+  modeManual: { uz: "Qo'lda tanlash", en: "Manual select", ru: "Выбрать вручную" },
+  modeCamera: { uz: "Kamera (AI)", en: "Camera (AI)", ru: "Камера (ИИ)" },
+  tarjimonTitle: { uz: "Imo-ishoradan matnga", en: "Sign to text", ru: "От жеста к тексту" },
+  resultHintCam: { uz: "Kamerani yoqing yoki pastdan tanlang", en: "Turn on the camera or pick below", ru: "Включите камеру или выберите ниже" },
+  resultHintManual: { uz: "Yuqoridagi qo'l shaklini bosing", en: "Tap a hand shape above", ru: "Нажмите на форму руки выше" },
+  detecting: { uz: "Aniqlanmoqda…", en: "Detecting…", ru: "Распознаётся…" },
+  detected: { uz: "Aniqlandi ✓", en: "Detected ✓", ru: "Распознано ✓" },
+  camStart: { uz: "📷 Kamerani yoqish", en: "📷 Turn on camera", ru: "📷 Включить камеру" },
+  camOn: { uz: "Kamera yoqilgan", en: "Camera on", ru: "Камера включена" },
+  camStop: { uz: "To'xtatish", en: "Stop", ru: "Остановить" },
+  camLegend: { uz: "Kamera 5 ta asosiy imo-ishorani taniydi: ✋ Salom · 👍 Yaxshi · ✊ Rahmat · ☝️ Ha · ✌️ G'alaba", en: "The camera recognizes 5 basic signs: ✋ Hello · 👍 Good · ✊ Thanks · ☝️ Yes · ✌️ Victory", ru: "Камера распознаёт 5 базовых жестов: ✋ Привет · 👍 Хорошо · ✊ Спасибо · ☝️ Да · ✌️ Победа" },
+  camHandDetected: { uz: "Qo'l aniqlandi", en: "Hand detected", ru: "Рука обнаружена" },
+  camCapturing: { uz: "Imo-ishora ushlandi…", en: "Capturing sign…", ru: "Жест захватывается…" },
+  camLoading: { uz: "AI modeli yuklanmoqda…", en: "Loading AI model…", ru: "Загрузка модели ИИ…" },
+  camModelFail: { uz: "AI modelini yuklab bo'lmadi. Internetni tekshirib, qayta urinib ko'ring.", en: "Could not load the AI model. Check your internet and try again.", ru: "Не удалось загрузить модель ИИ. Проверьте интернет и попробуйте снова." },
+  camConnFail: { uz: "Kameraga ulanib bo'lmadi. Brauzer kamera ruxsatini tekshiring.", en: "Could not access the camera. Check your browser's camera permission.", ru: "Не удалось подключиться к камере. Проверьте разрешение камеры в браузере." },
+  camRetry: { uz: "Qayta urinish", en: "Try again", ru: "Повторить" },
+  camUnsupported: { uz: "Bu brauzer kamerani qo'llab-quvvatlamaydi. Chrome yoki Safari'da oching.", en: "This browser doesn't support the camera. Open in Chrome or Safari.", ru: "Этот браузер не поддерживает камеру. Откройте в Chrome или Safari." },
+  teskariTitle: { uz: "Matndan imo-ishoraga — so'zni bosing", en: "Text to sign — tap a word", ru: "От текста к жесту — нажмите слово" },
+  avatarBadge: { uz: "🤖 AI surdo-tarjimon", en: "🤖 AI sign interpreter", ru: "🤖 ИИ сурдопереводчик" },
+  pickWordHint: { uz: "So'zlardan birini bosing", en: "Tap one of the words", ru: "Нажмите одно из слов" },
+  signing: { uz: "Ishora ko'rsatilmoqda…", en: "Showing the sign…", ru: "Жест показывается…" },
+  signed: { uz: "Imo-ishora ko'rsatildi ✓", en: "Sign shown ✓", ru: "Жест показан ✓" },
+  lessonsTitle: { uz: "Saboqlar — mavzuni tanlang", en: "Lessons — choose a topic", ru: "Уроки — выберите тему" },
+  lessonBack: { uz: "← Mavzularga qaytish", en: "← Back to topics", ru: "← Назад к темам" },
+  gamesTitle: { uz: "O'yinlar — mavzuni tanlang", en: "Games — choose a topic", ru: "Игры — выберите тему" },
+  statsTitle: { uz: "Mening natijalarim", en: "My results", ru: "Мои результаты" },
+  statTotal: { uz: "Jami ball", en: "Total score", ru: "Всего баллов" },
+  statWordsLbl: { uz: "O'rganilgan so'zlar", en: "Words learned", ru: "Изучено слов" },
+  statLessonsLbl: { uz: "Tugallangan darslar", en: "Lessons completed", ru: "Завершено уроков" },
+  statLevelLbl: { uz: "Daraja", en: "Level", ru: "Уровень" },
+  disclaimerLabel: { uz: "Izoh:", en: "Note:", ru: "Примечание:" },
+  disclaimerText: { uz: "bu — ilova oqimining ishlaydigan namoyishi. Imo-ishoralar texnologiya isboti uchun tanlangan; yakuniy o'zbek imo-ishora lug'ati surdopedagoglar bilan tuziladi.", en: "this is a working demo of the app's flow. The signs were chosen to prove the technology; the final Uzbek sign-language dictionary will be built with speech-language specialists.", ru: "это рабочая демонстрация логики приложения. Жесты выбраны для демонстрации технологии; итоговый словарь узбекского жестового языка будет составлен с сурдопедагогами." },
+  tabTarjimon: { uz: "Tarjimon", en: "Translate", ru: "Переводчик" },
+  tabTeskari: { uz: "Teskari", en: "Reverse", ru: "Обратно" },
+  tabSaboq: { uz: "Saboq", en: "Lessons", ru: "Уроки" },
+  tabGames: { uz: "O'yinlar", en: "Games", ru: "Игры" },
+  tabNatijalar: { uz: "Natijalar", en: "Results", ru: "Результаты" },
+  wordsSuffix: { uz: "so'z", en: "words", ru: "слов" },
+  question: { uz: "Savol", en: "Question", ru: "Вопрос" },
+  whichSign: { uz: "Qaysi imo-ishora", en: "Which sign means", ru: "Какой жест означает" },
+  means: { uz: "degani?", en: "?", ru: "?" },
+  lessonDone: { uz: "saboqi tugadi!", en: "lesson complete!", ru: "урок завершён!" },
+  correctWord: { uz: "to'g'ri", en: "correct", ru: "верно" },
+  restart: { uz: "Qayta boshlash", en: "Restart", ru: "Начать заново" },
+  skipLesson: { uz: "O'tkazib yuborish →", en: "Skip →", ru: "Пропустить →" },
+  pairs: { uz: "Juftliklar", en: "Pairs", ru: "Пары" },
+  moves: { uz: "Harakatlar", en: "Moves", ru: "Ходы" },
+  youWin: { uz: "G'olib bo'ldingiz!", en: "You won!", ru: "Вы выиграли!" },
+  playAgain: { uz: "Qayta o'ynash", en: "Play again", ru: "Играть снова" },
+  notDone: { uz: "Hali topshirilmagan", en: "Not done yet", ru: "Ещё не пройдено" }
+};
+var currentLang = 'uz';
+function t(key) { var e = I18N[key]; return e ? (e[currentLang] || e.uz) : key; }
+function applyStaticI18n() {
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+}
+
+var CATEGORIES = [
+  { id: 'salom', icon: '👋',
+    title: { uz: 'Salomlashish', en: 'Greetings', ru: 'Приветствия' },
+    words: [
+      { e: '✋', uz: { w: 'Salom!', label: 'Ochiq kaft' }, en: { w: 'Hello!', label: 'Open palm' }, ru: { w: 'Привет!', label: 'Открытая ладонь' } },
+      { e: '👋', uz: { w: 'Xayr!', label: 'Silkitish' }, en: { w: 'Bye!', label: 'Waving' }, ru: { w: 'Пока!', label: 'Помахать рукой' } },
+      { e: '👍', uz: { w: 'Yaxshi!', label: 'Bosh barmoq' }, en: { w: 'Good!', label: 'Thumbs up' }, ru: { w: 'Хорошо!', label: 'Большой палец' } },
+      { e: '🤝', uz: { w: 'Tanishganimdan xursandman', label: "Qo'l berish" }, en: { w: 'Nice to meet you', label: 'Handshake' }, ru: { w: 'Приятно познакомиться', label: 'Рукопожатие' } },
+      { e: '🙏', uz: { w: 'Iltimos', label: "Qo'shilgan kaft" }, en: { w: 'Please', label: 'Palms together' }, ru: { w: 'Пожалуйста', label: 'Ладони вместе' } },
+      { e: '✊', uz: { w: 'Rahmat!', label: 'Musht' }, en: { w: 'Thank you!', label: 'Fist' }, ru: { w: 'Спасибо!', label: 'Кулак' } }
+    ]},
+  { id: 'maktab', icon: '🎒',
+    title: { uz: 'Maktab', en: 'School', ru: 'Школа' },
+    words: [
+      { e: '☝️', uz: { w: 'Ha', label: "Ko'rsatkich" }, en: { w: 'Yes', label: 'Index finger' }, ru: { w: 'Да', label: 'Указательный палец' } },
+      { e: '✌️', uz: { w: "G'alaba!", label: "G'alaba belgisi" }, en: { w: 'Victory!', label: 'Peace sign' }, ru: { w: 'Победа!', label: 'Знак победы' } },
+      { e: '🤞', uz: { w: 'Omad', label: 'Barmoq chatish' }, en: { w: 'Good luck', label: 'Fingers crossed' }, ru: { w: 'Удачи', label: 'Скрещенные пальцы' } },
+      { e: '👌', uz: { w: 'Tushundim', label: 'Halqa belgisi' }, en: { w: 'Got it', label: 'OK sign' }, ru: { w: 'Понятно', label: 'Знак ОК' } },
+      { e: '🙌', uz: { w: 'Ajoyib!', label: "Ikki qo'l" }, en: { w: 'Great!', label: 'Both hands up' }, ru: { w: 'Отлично!', label: 'Обе руки' } }
+    ]},
+  { id: 'hissa', icon: '💜',
+    title: { uz: "His-tuyg'u", en: 'Feelings', ru: 'Чувства' },
+    words: [
+      { e: '🫶', uz: { w: 'Sevaman', label: "Yurak qo'llar" }, en: { w: 'Love you', label: 'Heart hands' }, ru: { w: 'Люблю тебя', label: 'Руки-сердце' } },
+      { e: '🤗', uz: { w: 'Xursandman', label: 'Quchoqlash' }, en: { w: 'Happy', label: 'Hug' }, ru: { w: 'Счастлив(а)', label: 'Объятия' } },
+      { e: '👏', uz: { w: 'Barakalla', label: 'Chapak' }, en: { w: 'Well done', label: 'Clapping' }, ru: { w: 'Молодец', label: 'Аплодисменты' } },
+      { e: '🤲', uz: { w: 'Kechirasiz', label: 'Ochiq ikki kaft' }, en: { w: 'Sorry', label: 'Open hands' }, ru: { w: 'Извините', label: 'Открытые ладони' } }
+    ]},
+  { id: 'raqam', icon: '🔢',
+    title: { uz: 'Raqamlar', en: 'Numbers', ru: 'Числа' },
+    words: [
+      { e: '1️⃣', uz: { w: 'Bir', label: 'Bitta barmoq' }, en: { w: 'One', label: 'One finger' }, ru: { w: 'Один', label: 'Один палец' } },
+      { e: '2️⃣', uz: { w: 'Ikki', label: 'Ikki barmoq' }, en: { w: 'Two', label: 'Two fingers' }, ru: { w: 'Два', label: 'Два пальца' } },
+      { e: '3️⃣', uz: { w: 'Uch', label: 'Uch barmoq' }, en: { w: 'Three', label: 'Three fingers' }, ru: { w: 'Три', label: 'Три пальца' } },
+      { e: '4️⃣', uz: { w: "To'rt", label: "To'rt barmoq" }, en: { w: 'Four', label: 'Four fingers' }, ru: { w: 'Четыре', label: 'Четыре пальца' } },
+      { e: '5️⃣', uz: { w: 'Besh', label: 'Besh barmoq' }, en: { w: 'Five', label: 'Five fingers' }, ru: { w: 'Пять', label: 'Пять пальцев' } }
+    ]}
+];
+var ALL_WORDS = [];
+CATEGORIES.forEach(function (c) { c.words.forEach(function (w) { ALL_WORDS.push(w); }); });
+var completedLessons = new Set();
+
+function wordText(item) { return item.uz.w; }
+function wordDisplay(item) { return (item[currentLang] || item.uz).w; }
+function labelDisplay(item) { return (item[currentLang] || item.uz).label; }
+function catTitle(c) { return c.title[currentLang] || c.title.uz; }
+var WORD_BY_UZ = {};
+ALL_WORDS.forEach(function (item) { WORD_BY_UZ[item.uz.w] = item; });
+window.translateUzWord = function (uzWord) {
+  var item = WORD_BY_UZ[uzWord];
+  return item ? wordDisplay(item) : uzWord;
+};
+
+var resultEl = document.getElementById('result');
+var resultSub = document.getElementById('resultSub');
+var gestures = document.getElementById('gestures');
+var catChipsEl = document.getElementById('catChips');
+var activeCat = CATEGORIES[0].id;
+
+function renderCatChips() {
+  catChipsEl.innerHTML = '';
+  CATEGORIES.forEach(function (c) {
+    var chip = document.createElement('button');
+    chip.className = 'catChip' + (c.id === activeCat ? ' active' : '');
+    chip.textContent = c.icon + ' ' + catTitle(c);
+    chip.addEventListener('click', function () { activeCat = c.id; renderCatChips(); renderGestureGrid(); });
+    catChipsEl.appendChild(chip);
+  });
+}
+
+function renderGestureGrid() {
+  var cat = CATEGORIES.filter(function (c) { return c.id === activeCat; })[0];
+  gestures.innerHTML = '';
+  cat.words.forEach(function (item) {
+    var b = document.createElement('button');
+    b.className = 'gbtn';
+    b.innerHTML = '<span class="emoji">' + item.e + '</span>' + (labelDisplay(item) || wordDisplay(item));
+    b.addEventListener('click', function () {
+      gestures.querySelectorAll('.gbtn').forEach(function (x) { x.classList.remove('active'); });
+      b.classList.add('active');
+      resultSub.textContent = t('detecting');
+      resultEl.textContent = '';
+      setTimeout(function () {
+        resultEl.textContent = wordDisplay(item);
+        resultEl.style.transform = 'scale(1.1)';
+        setTimeout(function () { resultEl.style.transform = 'scale(1)'; }, 150);
+        resultSub.textContent = t('detected');
+        bump(item.uz.w);
+      }, 350);
+    });
+    gestures.appendChild(b);
+  });
+}
+
+var chipsEl = document.getElementById('chips');
+var signEl = document.getElementById('sign');
+var signSub = document.getElementById('signSub');
+var signEmoji = document.getElementById('signEmoji');
+function renderTeskariChips() {
+  chipsEl.innerHTML = '';
+  ALL_WORDS.forEach(function (item) {
+    var c = document.createElement('div');
+    c.className = 'chip';
+    c.textContent = wordDisplay(item).replace('!', '');
+    c.addEventListener('click', function () {
+      chipsEl.querySelectorAll('.chip').forEach(function (x) { x.classList.remove('active'); });
+      c.classList.add('active');
+      signSub.textContent = t('signing');
+      signEl.textContent = '';
+      signEmoji.classList.remove('playing');
+      signEmoji.textContent = item.e;
+      void signEmoji.offsetWidth;
+      signEmoji.classList.add('playing');
+      setTimeout(function () {
+        signEl.textContent = wordDisplay(item);
+        signSub.textContent = t('signed');
+        bump(item.uz.w);
+      }, 650);
+    });
+    chipsEl.appendChild(c);
+  });
+}
+
+var lessonPicker = document.getElementById('lessonPicker');
+var lessonRunner = document.getElementById('lessonRunner');
+var lessonBody = document.getElementById('lessonBody');
+var lessonFill = document.getElementById('lessonFill');
+var lessonBackBtn = document.getElementById('lessonBackBtn');
+var qi = 0, qScore = 0, curCat = null, curQuiz = [];
+var lessonToken = 0;
+
+function renderLessonPicker() {
+  lessonToken++;
+  lessonPicker.style.display = 'grid';
+  lessonRunner.style.display = 'none';
+  lessonPicker.innerHTML = '';
+  CATEGORIES.forEach(function (c) {
+    var done = completedLessons.has(c.id);
+    var card = document.createElement('div');
+    card.className = 'lessonCard' + (done ? ' done' : '');
+    card.innerHTML = '<div class="licon">' + (done ? '✅' : c.icon) + '</div><div class="ltitle">' + catTitle(c) + '</div><div class="lcount">' + c.words.length + ' ' + t('wordsSuffix') + '</div>';
+    card.addEventListener('click', function () { startLesson(c); });
+    lessonPicker.appendChild(card);
+  });
+}
+
+function startLesson(cat) {
+  curCat = cat;
+  lessonPicker.style.display = 'none';
+  lessonRunner.style.display = 'block';
+  var token = ++lessonToken;
+  playVideoLesson(cat, 0, token);
+}
+
+function playVideoLesson(cat, idx, token) {
+  if (token !== lessonToken) return;
+  if (idx >= cat.words.length) { buildQuiz(cat); qi = 0; qScore = 0; renderQuestion(); return; }
+  lessonFill.style.width = (idx / cat.words.length * 100) + '%';
+  var item = cat.words[idx];
+  lessonBody.innerHTML =
+    '<div class="videoLesson"><div class="avatarEmoji playing" id="vlEmoji" style="font-size:60px;">' + item.e + '</div>' +
+    '<div class="vlWord">' + wordDisplay(item) + '</div>' +
+    '<div class="vlBar"><div class="vlFill" id="vlFill"></div></div>' +
+    '<button class="vlSkip" id="vlSkipBtn">' + t('skipLesson') + '</button></div>';
+  setTimeout(function () { var f = document.getElementById('vlFill'); if (f) f.style.width = '100%'; }, 30);
+  var timer = setTimeout(function () { playVideoLesson(cat, idx + 1, token); }, 1600);
+  document.getElementById('vlSkipBtn').addEventListener('click', function () {
+    clearTimeout(timer);
+    buildQuiz(cat); qi = 0; qScore = 0; renderQuestion();
+  });
+}
+
+function buildQuiz(cat) {
+  curQuiz = cat.words.map(function (item, idx) {
+    var pool = cat.words.filter(function (x) { return x !== item; });
+    var wrong = pool[idx % pool.length];
+    return { q: wordDisplay(item).replace('!', ''), correct: item.e + ' ' + (labelDisplay(item) || wordDisplay(item)), wrong: wrong.e + ' ' + (labelDisplay(wrong) || wordDisplay(wrong)), key: item.uz.w };
+  });
+}
+
+function renderQuestion() {
+  lessonFill.style.width = (qi / curQuiz.length * 100) + '%';
+  var item = curQuiz[qi];
+  var opts = (qi % 2 === 0) ? [item.correct, item.wrong] : [item.wrong, item.correct];
+  var html = '<div class="lesson-q">' + t('question') + ' ' + (qi + 1) + ' / ' + curQuiz.length + '<br>' + t('whichSign') + ' <b>«' + item.q + '»</b> ' + t('means') + '</div>';
+  opts.forEach(function (opt) {
+    html += '<button class="qbtn" data-ok="' + (opt === item.correct) + '">' + opt + '</button>';
+  });
+  lessonBody.innerHTML = html;
+  var answered = false;
+  lessonBody.querySelectorAll('.qbtn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (answered) return;
+      answered = true;
+      var ok = b.getAttribute('data-ok') === 'true';
+      if (ok) { b.classList.add('correct'); qScore++; bump(item.key); }
+      else {
+        b.classList.add('wrong');
+        lessonBody.querySelectorAll('.qbtn').forEach(function (x) {
+          if (x.getAttribute('data-ok') === 'true') x.classList.add('correct');
+        });
+      }
+      setTimeout(function () {
+        qi++;
+        if (qi < curQuiz.length) renderQuestion(); else renderDone();
+      }, 700);
+    });
+  });
+}
+
+function renderDone() {
+  lessonFill.style.width = '100%';
+  completedLessons.add(curCat.id);
+  refreshStats();
+  lessonBody.innerHTML =
+    '<div class="lesson-done"><div class="big">' + (qScore === curQuiz.length ? '🏆' : qScore >= curQuiz.length / 2 ? '🎉' : '💪') + '</div>' +
+    '<div>' + catTitle(curCat) + ' ' + t('lessonDone') + '</div>' +
+    '<div class="score">' + qScore + ' / ' + curQuiz.length + ' ' + t('correctWord') + '</div><br>' +
+    '<button class="restartbtn" id="restartBtn">' + t('restart') + '</button></div>';
+  document.getElementById('restartBtn').addEventListener('click', function () { startLesson(curCat); });
+}
+lessonBackBtn.addEventListener('click', renderLessonPicker);
+
+var gamePicker = document.getElementById('gamePicker');
+var gameRunner = document.getElementById('gameRunner');
+var gameBackBtn = document.getElementById('gameBackBtn');
+var memGrid = document.getElementById('memGrid');
+var gameStatusEl = document.getElementById('gameStatus');
+var memDeck = [], memFlipped = [], memMatched = 0, memMoves = 0, memCat = null, memBusy = false;
+
+function renderGamePicker() {
+  gamePicker.style.display = 'grid';
+  gameRunner.style.display = 'none';
+  gamePicker.innerHTML = '';
+  CATEGORIES.forEach(function (c) {
+    var card = document.createElement('div');
+    card.className = 'lessonCard';
+    card.innerHTML = '<div class="licon">' + c.icon + '</div><div class="ltitle">' + catTitle(c) + '</div><div class="lcount">' + c.words.length + ' ' + t('wordsSuffix') + '</div>';
+    card.addEventListener('click', function () { startMemoryGame(c); });
+    gamePicker.appendChild(card);
+  });
+}
+
+function shuffle(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
+}
+
+function startMemoryGame(cat) {
+  memCat = cat;
+  memMatched = 0; memMoves = 0; memFlipped = []; memBusy = false;
+  memDeck = [];
+  cat.words.forEach(function (item) {
+    memDeck.push({ key: item.uz.w, type: 'e', content: item.e });
+    memDeck.push({ key: item.uz.w, type: 'w', content: wordDisplay(item) });
+  });
+  shuffle(memDeck);
+  gamePicker.style.display = 'none';
+  gameRunner.style.display = 'block';
+  renderMemGrid();
+  updateGameStatus();
+}
+
+function updateGameStatus() {
+  gameStatusEl.textContent = t('pairs') + ': ' + memMatched + ' / ' + memCat.words.length + '   ·   ' + t('moves') + ': ' + memMoves;
+}
+
+function renderMemGrid() {
+  memGrid.innerHTML = '';
+  memDeck.forEach(function (card, idx) {
+    var el = document.createElement('div');
+    el.className = 'memCard';
+    el.innerHTML = '<div class="face front">★</div><div class="face back">' + card.content + '</div>';
+    el.addEventListener('click', function () { flipMemCard(idx, el); });
+    memGrid.appendChild(el);
+  });
+}
+
+function flipMemCard(idx, el) {
+  if (memBusy || el.classList.contains('flipped') || el.classList.contains('matched')) return;
+  el.classList.add('flipped');
+  memFlipped.push({ idx: idx, el: el });
+  if (memFlipped.length === 2) {
+    memMoves++;
+    memBusy = true;
+    var a = memFlipped[0], b = memFlipped[1];
+    var match = memDeck[a.idx].key === memDeck[b.idx].key;
+    if (match) {
+      a.el.classList.add('matched'); b.el.classList.add('matched');
+      memMatched++;
+      bump(memDeck[a.idx].key);
+      memFlipped = []; memBusy = false;
+      updateGameStatus();
+      if (memMatched === memCat.words.length) { setTimeout(showGameWin, 400); }
+    } else {
+      setTimeout(function () {
+        a.el.classList.remove('flipped'); b.el.classList.remove('flipped');
+        memFlipped = []; memBusy = false;
+        updateGameStatus();
+      }, 700);
+    }
+  }
+}
+
+function showGameWin() {
+  memGrid.innerHTML = '<div class="lesson-done"><div class="big">🏆</div><div>' + t('youWin') + '</div>' +
+    '<div class="score">' + memMoves + ' ' + t('moves').toLowerCase() + '</div><br>' +
+    '<button class="restartbtn" id="memRestartBtn">' + t('playAgain') + '</button></div>';
+  document.getElementById('memRestartBtn').addEventListener('click', function () { startMemoryGame(memCat); });
+}
+gameBackBtn.addEventListener('click', renderGamePicker);
+
+var langBtns = document.querySelectorAll('.langBtn');
+function setLang(lang) {
+  currentLang = lang;
+  langBtns.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
+  applyStaticI18n();
+  renderCatChips();
+  renderGestureGrid();
+  renderTeskariChips();
+  if (lessonRunner.style.display === 'none' || !document.getElementById('page-darslar').classList.contains('active')) { renderLessonPicker(); }
+  else { renderLessonPicker(); }
+  if (gameRunner.style.display === 'none') { renderGamePicker(); }
+  else { renderGamePicker(); }
+  resultEl.textContent = '—'; resultSub.textContent = cameraView.style.display === 'none' ? t('resultHintManual') : t('resultHintCam');
+  signEl.textContent = '—'; signSub.textContent = t('pickWordHint');
+  refreshStats();
+}
+langBtns.forEach(function (b) {
+  b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); });
+});
+
+applyStaticI18n();
+renderCatChips();
+renderGestureGrid();
+renderTeskariChips();
+renderLessonPicker();
+renderGamePicker();
+refreshStats();
+</script>
+
+<script type="module">
+import { HandLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
+
+var video = document.getElementById('video');
+var canvas = document.getElementById('overlay');
+var ctx = canvas.getContext('2d');
+var camStartBtn = document.getElementById('camStartBtn');
+var camStopBtn = document.getElementById('camStopBtn');
+var camhint = document.getElementById('camhint');
+var camtop = document.getElementById('camtop');
+var camStatus = document.getElementById('camStatus');
+
+var CONNECTIONS = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,9],[9,10],[10,11],[11,12],
+  [0,13],[13,14],[14,15],[15,16],[0,17],[17,18],[18,19],[19,20],[5,9],[9,13],[13,17],[0,17]];
+
+var handLandmarker = null, running = false, rafId = null, stream = null;
+var lastGesture = null, holdFrames = 0, shownWord = null, shownUntil = 0;
+
+function setHint(html, showBtn) {
+  camhint.innerHTML = showBtn ? '<button class="camstartbtn" id="camStartBtn2">' + window.t('camStart') + '</button>' : '<div>' + html + '</div>';
+  if (showBtn) document.getElementById('camStartBtn2').addEventListener('click', startCamera);
+}
+
+async function loadModel() {
+  setHint(window.t('camLoading'), false);
+  var vision = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm");
+  handLandmarker = await HandLandmarker.createFromOptions(vision, {
+    baseOptions: {
+      modelAssetPath: "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+      delegate: "GPU"
+    },
+    runningMode: "VIDEO",
+    numHands: 1,
+    minHandDetectionConfidence: 0.6,
+    minTrackingConfidence: 0.5
+  });
+}
+
+async function startCamera() {
+  if (!handLandmarker) {
+    try { await loadModel(); }
+    catch (err) {
+      console.error(err);
+      setHint(window.t('camModelFail') + "<br><br><button class='camstartbtn' id='camRetry'>" + window.t('camRetry') + "</button>", false);
+      document.getElementById('camRetry')?.addEventListener('click', startCamera);
+      return;
+    }
+  }
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: 480, height: 360 }, audio: false });
+    video.srcObject = stream;
+    await video.play();
+    canvas.width = video.videoWidth || 480;
+    canvas.height = video.videoHeight || 360;
+    camhint.style.display = 'none';
+    camtop.style.display = 'flex';
+    running = true;
+    loop();
+  } catch (err) {
+    console.error(err);
+    setHint(window.t('camConnFail') + "<br><br><button class='camstartbtn' id='camRetry'>" + window.t('camRetry') + "</button>", false);
+    document.getElementById('camRetry')?.addEventListener('click', startCamera);
+  }
+}
+
+function stopCamera() {
+  running = false;
+  if (rafId) cancelAnimationFrame(rafId);
+  if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  camtop.style.display = 'none';
+  setHint('', true);
+}
+window.stopCamera = stopCamera;
+
+function fingerUp(lm, tip, pip) { return lm[tip].y < lm[pip].y - 0.03; }
+function thumbOut(lm) {
+  var tip = lm[4], ip = lm[3], mcp = lm[2], pinkyMcp = lm[17];
+  var dTip = Math.hypot(tip.x - pinkyMcp.x, tip.y - pinkyMcp.y);
+  var dIp = Math.hypot(ip.x - pinkyMcp.x, ip.y - pinkyMcp.y);
+  return dTip > dIp * 1.1 && tip.y < mcp.y + 0.12;
+}
+function classify(lm) {
+  var idx = fingerUp(lm, 8, 6), mid = fingerUp(lm, 12, 10), ring = fingerUp(lm, 16, 14), pinky = fingerUp(lm, 20, 18);
+  var thumb = thumbOut(lm);
+  var upCount = [idx, mid, ring, pinky].filter(Boolean).length;
+  if (thumb && upCount === 0) return 'Yaxshi!';
+  if (!thumb && upCount === 4) return 'Salom!';
+  if (!thumb && upCount === 0) return 'Rahmat!';
+  if (!thumb && idx && !mid && !ring && !pinky) return 'Ha';
+  if (!thumb && idx && mid && !ring && !pinky) return "G'alaba!";
+  return null;
+}
+function drawHand(lm) {
+  ctx.save();
+  ctx.strokeStyle = '#5B9BF5'; ctx.lineWidth = 3; ctx.lineCap = 'round';
+  ctx.beginPath();
+  CONNECTIONS.forEach(function (c) {
+    ctx.moveTo(lm[c[0]].x * canvas.width, lm[c[0]].y * canvas.height);
+    ctx.lineTo(lm[c[1]].x * canvas.width, lm[c[1]].y * canvas.height);
+  });
+  ctx.stroke();
+  lm.forEach(function (p) {
+    ctx.beginPath();
+    ctx.arc(p.x * canvas.width, p.y * canvas.height, 4.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#EAF1FD'; ctx.fill();
+    ctx.lineWidth = 1.6; ctx.strokeStyle = '#1455D6'; ctx.stroke();
+  });
+  ctx.restore();
+}
+
+function loop() {
+  if (!running) return;
+  var now = performance.now();
+  var results = handLandmarker.detectForVideo(video, now);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (results.landmarks && results.landmarks.length > 0) {
+    var lm = results.landmarks[0];
+    drawHand(lm);
+    var g = classify(lm);
+    if (g && g === lastGesture) holdFrames++; else { lastGesture = g; holdFrames = 0; }
+    camStatus.textContent = g ? window.t('camCapturing') : window.t('camHandDetected');
+    if (g && holdFrames === 8) {
+      if (g !== shownWord || now > shownUntil) {
+        shownWord = g; shownUntil = now + 1400;
+        resultEl.textContent = window.translateUzWord(g);
+        resultEl.style.transform = 'scale(1.1)';
+        setTimeout(function () { resultEl.style.transform = 'scale(1)'; }, 150);
+        resultSub.textContent = window.t('detected');
+        bump(g);
+      }
+    }
+  } else {
+    camStatus.textContent = window.t('camOn');
+    lastGesture = null; holdFrames = 0;
+    if (performance.now() > shownUntil) resultSub.textContent = window.t('resultHintCam');
+  }
+  rafId = requestAnimationFrame(loop);
+}
+
+camStartBtn.addEventListener('click', startCamera);
+camStopBtn.addEventListener('click', stopCamera);
+if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+  setHint(window.t('camUnsupported'), false);
+}
+</script>
+</body>
+</html>
